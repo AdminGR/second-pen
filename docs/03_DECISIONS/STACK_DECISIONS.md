@@ -10,11 +10,11 @@ Wire adapters now. Choose vendors when the first slice is implemented. Do not le
 |---|---|---|---|
 | STT (dictation) | Browser Web Speech, Deepgram, Whisper-class API, Apple/Google on-device later | First-class with typing; latency is a product requirement; transcript is canonical text (`.md`), audio is disposable | **Open** |
 | TTS (Listen) | Provider TTS (OpenAI, ElevenLabs, Google, Amazon), OS speech | First-class with read; play from text, do not store audio as source of truth | **Open** |
-| Generation (draft + critic) | HTTP and/or LLM CLI behind one adapter | Bounded critic; [context assembly](../02_ARCHITECTURE/CONTEXT_ASSEMBLY.md) | **Transport settled** ([ADR-004](ADR/ADR-004-llm-transport.md)); **models open** |
+| Generation (draft + critic) | HTTP and/or LLM CLI behind one adapter | Bounded critic; [context assembly](../02_ARCHITECTURE/CONTEXT_ASSEMBLY.md) | **Policy + HTTP adapter settled** ([ADR-005](ADR/ADR-005-generation-adapter.md)); **exact model ids open** (env catalog) |
 | Canonical `.md` | Local folder (inner loop); R2; Vercel Blob; any S3 API | Exportable folder of text if the app vanishes | **Settled shape** (ADR-001); vendor **open** between R2 and Blob |
 | Indexes | Neon FTS + pgvector (hosted); local stand-in in inner loop | Disposable; rebuild from `.md`; hybrid keyword + embeddings | **Settled** (ADR-001) |
 | Auth | None (one local user); Auth.js; Clerk; Supabase Auth only as identity | One user in the slice; no team | **Open** |
-| Destination adapters | One adapter per destination vs one shared adapter + per-destination config | Destinations are mechanics (pacing), not separate products. Prefer **shared adapter + config** so Reel/web/manual/script do not become four apps | **Lean shared + config**; not implemented |
+| Destination adapters | Shared adapter + per-destination config | Push *targets* later. Writing *mode* is genre pills, not four apps. | **Lean shared + config**; not implemented |
 | Influence / SoR connectors | None in slice | Week three; references not file ownership | **Out of slice** |
 
 When a row is chosen, cut an ADR. Do not bury the choice in chat.
@@ -34,4 +34,4 @@ The product never “is” a CLI. Luna / Terra / Sol are tiers. Behind each tier
 
 **Luna via CLI** (local Ollama or a cheap `llm` default) is the interesting CLI case: routine jobs stay off frontier HTTP. Terra/Sol on the hosted app stay HTTP until there is a real reason not to.
 
-Still open: which CLI for local Luna, which HTTP models for Terra/Sol. When chosen, cut an ADR.
+Still open: which hosted catalog (direct OpenAI vs OpenRouter vs Vercel AI Gateway) and which local Luna binary (`llm` vs Ollama). Policy and adapter are [ADR-005](ADR/ADR-005-generation-adapter.md). When a catalog is chosen as the *default* hosted endpoint, cut a short ADR; pointing `LLM_BASE_URL` does not need one.

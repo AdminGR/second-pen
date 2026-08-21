@@ -10,8 +10,8 @@ The clickable slice **is allowed**. Do not add `dashboard/`, libraries, Galaxy, 
 
 ## Prototype guardrails (literal)
 
-- [ ] No new nav item, tab, or browsable list without an explicit call-out.
-- [ ] Audience and guardrails stay in context-assembly steps 3 and 7, not home-screen settings.
+- [ ] No new nav item, tab, or browsable list without an explicit call-out. Writing-mode pills and author/brand/system voice-lane pills are session parameters each write, not a library. Mac File / Folder / Projects are OS menus on desktop later, not an in-app rail in `web/`.
+- [ ] Audience is inferred (assembly step 3), not a home-screen setting. Voice lane is a session click that chooses author vs brand vs system retrieval.
 - [ ] Galaxy stays visualization-only until a written decision reopens it.
 - [ ] Draft is a document, not a chat turn.
 - [ ] Push stores generated + edited + accepted (download `.md` is the stub).

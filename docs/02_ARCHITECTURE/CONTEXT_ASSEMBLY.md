@@ -7,7 +7,7 @@ Source: engine keep-list in [PATH_FORWARD.md](../BRAINSTORMING/PATH_FORWARD.md),
 
 AI sits **above** this pipeline. Retrieval and stacking happen first. A model does not invent voice from a “write like me” instruction.
 
-Authentic voice stays dominant. Conceptual mix (not a metric): authentic ~70%, influence ~15%, destination mechanics ~10%, task direction ~5%. If a later step would drown authentic voice, drop that step’s payload, do not average it in.
+Authentic ~70% applies **only** to author-dependent sessions. Brand-dependent retrieves the brand corpus, not the author's personal voice. System-dependent retrieves register/guardrails for that institution (legal, academic, technical, corporate reporting). Influence stays a later, separate lane and never merges into authentic.
 
 ## Pipeline I/O
 
@@ -16,7 +16,8 @@ Authentic voice stays dominant. Conceptual mix (not a metric): authentic ~70%, i
 | Field | Required | Surface? | Notes |
 |---|---|---|---|
 | `brief_text` | yes | yes | Typed or STT transcript |
-| `destination` | yes | yes | `reel` \| `web_copy` \| `manual` \| `script` |
+| `writing` | yes | yes | Genre pills. CTA, not a tab bar. |
+| `voice` | yes | yes | `author_*` \| `brand_client` \| `system_*`. Session CTA each write, not onboarding. Selects which corpus/register to retrieve. Named brands after seed — not a library. |
 | `routing_tier` | yes | picker | `luna` \| `terra` \| `sol` after [ADR-003](../03_DECISIONS/ADR/ADR-003-model-routing.md) |
 | `auto` | yes | toggle | Structure-extraction mode; does not skip this pipeline |
 | `audience` | no | **no** | Inferred or taken from brief; never a home-screen control |
@@ -29,12 +30,18 @@ A single JSON context package passed to the generator, plus a provenance manifes
 
 ---
 
-### Step 1 — Authentic voice
+### Step 1 — Voice lane (author / brand / system)
 
-**In:** workspace id, person id.  
-**Out:** `authentic_profile` (current semantic snapshot: tone, rhythm, vocabulary, avoid-list, evidence ids) and `profile_version`.  
-**Retrieve:** `memory_kind = semantic`, `source_class = owned`, type = voice profile. If none exists, run quiet seed analysis first (Sol unless picker says otherwise) or proceed with an empty profile and mark `voice_status: unseeded` (drafts will be generic; that is a product failure for the slice).  
-**Must not:** pull influence traits into this object.
+**In:** `voice` (session CTA).  
+**Out:** which profile and example set to load.
+
+- **Author-dependent:** `authentic_profile` from `source_class = owned`, harnessed to the chosen body of work (journalism, YouTube, general writing). Mix: authentic dominant.
+- **Brand-dependent:** `brand_profile` from `source_class = brand`. **Must not** use the author's personal voice. Named brand ids attach after seed; the picker is not a brand CMS.
+- **System-dependent:** register profile + guardrails for technical / legal / academic / corporate reporting. **Must not** flatten into personal or consumer-brand voice.
+
+If the chosen corpus is empty, mark `voice_status: unseeded` for that lane and still generate under the lane's constraints (generic until seed). That is a product failure for author-dependent day one; less fatal for system register.
+
+**Must not:** pull influence traits into this object. Influence is still step 6 and off in this slice.
 
 ### Step 2 — Communication objective
 
@@ -49,18 +56,18 @@ A single JSON context package passed to the generator, plus a provenance manifes
 **Out:** `audience` (e.g. existing customers, suppliers, self, public).  
 **How:** parse or reuse. **Not a home-screen setting.** If it appears as one, that is a flag, not a feature.
 
-### Step 4 — Destination / format mechanics
+### Step 4 — Writing-mode mechanics
 
-**In:** `destination`.  
-**Out:** `mechanics` — sentence-length band, pause/line-break rules, spoken-vs-read flag, typical duration or word count, heading policy.  
-**Retrieve:** semantic destination-mechanics `.md` for that destination.  
-**Must:** change pacing, not only “tone.” A Reel and a manual step in the same voice are not paced the same way.
+**In:** `writing`.  
+**Out:** `mechanics` — what this draft is allowed to be (length, spoken-vs-read, evidence rules, heading policy).  
+**Retrieve:** semantic mechanics `.md` for that writing kind (`web/lib/writing-mode.ts` is the stub catalog).  
+**Must:** change allowed moves, not only “tone.” Editorial long form and conversational writing in the same voice are not the same job.
 
-### Step 5 — Relevant authentic examples
+### Step 5 — Relevant examples for the active lane
 
-**In:** `brief_text`, `destination`, `objective`, `audience`, embedding of the brief.  
-**Out:** up to 5 episodic passages, `source_class` in `owned` \| `authorized`, not deleted, preferably same destination or nearby, ranked by hybrid index (see DATA_MODEL).  
-**Must not:** include `generated` unless it was later accepted (accepted copy is `owned`).  
+**In:** `brief_text`, `writing`, `voice`, `objective`, `audience`, embedding of the brief.  
+**Out:** up to 5 episodic passages from the **active lane** (owned for author, brand for brand, reference/register for system).  
+**Must not:** include `generated` unless it was later accepted (accepted copy is `owned`). Author-dependent must not pull `brand`. Brand-dependent must not pull personal `owned` as if it were the brand.  
 **Must:** attach passage ids to the manifest.
 
 ### Step 6 — Optional influence profile

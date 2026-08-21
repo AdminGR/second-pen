@@ -25,7 +25,7 @@ Do not clone a Galaxy-first or project-page UI. No layer swallows another.
 Voice is the interface. Text is the substrate.
 
 ```text
-1. Experience     Voice · Listen · Mobile · Desktop · Galaxy
+1. Experience     Voice · Listen · Mobile · Desktop (Mac OS menus) · Galaxy
 2. Cognitive      .md nodes · Graph · Time · Context
 3. Intelligence   Auto / Luna / Terra / Sol · retrieval
 4. Durable        Markdown · relationships · history
@@ -59,11 +59,12 @@ No layer swallows another. Experience must not become a CMS. Durable must not be
 
 ### 1. Experience
 
-What they use: Voice in, Listen out, a pinned draft, a destination parameter, Push. Desktop and mobile are the same product. Galaxy is a visualization of the relationship graph, not the home screen and not the product.
+What they use: Voice in, Listen out, a pinned draft, a **writing mode** (genre pills), Push. Desktop and mobile are the same product. On Mac, desktop is a document app: native File / Open / Close / Folder / Projects in the OS menu bar, not in-page chrome. Galaxy is a visualization of the relationship graph, not the home screen and not the product. Holding UI: `docs/UI:UX/holding-hero-reference.png` — reference only, not approved.
 
 Day-one surface controls that are allowed to be visible:
 
-- Destination (Reel, web copy, manual, script)
+- Writing mode (CTA pill → genres). **Call-out:** craft, not a nav bar.
+- Voice lane (CTA pill below → author / brand / system, with harness pills). **Call-out:** each write, not onboarding; not a brand/corpus library.
 - Auto (toggle: structure-keeping mode for dumps and large projects)
 - Routing picker (Luna / Terra / Sol), exposed from day one as routing, not as a settings tour
 
@@ -81,7 +82,7 @@ Frontier models are the powerhouse. Second Pen is the light interface people act
 
 What they feel: **Auto** — an LLM that keeps structure. That is a toggle, used for data dumps of text and large projects.
 
-Underneath: **Luna** (cheap / routine), **Terra** (default work), **Sol** (hard reasoning). Cost, latency, and capability are routing concerns. Day one exposes the picker via routing.
+Underneath: **Luna** (cheap / routine), **Terra** (default work), **Sol** (hard reasoning). Cost, latency, and capability are routing concerns. The policy lives in-repo (`web/lib/route-job.ts`): most drafts are Terra on a cheap model; Sol only for seed/reflection or long structural drafts. Model ids are env, so we or a user can retarget a tier without a fork. Transport is OpenAI-compatible HTTP ([ADR-005](../03_DECISIONS/ADR/ADR-005-generation-adapter.md)). Do not fork a public LLM-router repo.
 
 AI sits above retrieval:
 
@@ -120,7 +121,7 @@ Day one copy in/out is Markdown the person pastes, uploads, or exports.
 |---|---|---|
 | Working surface | Experience | Hybrid input stream + pinned draft + Listen + Push |
 | STT / TTS adapters | Experience / Intelligence | Dictate in, listen out |
-| Session / Draft / Destination / Push | Cognitive | Software identities for the Blueprint loop |
+| Session / Draft / Writing mode / Push | Cognitive | Software identities for the Blueprint loop |
 | Retriever | Intelligence | Authentic lane, later influence lane, later facts lane |
 | Router | Intelligence | Auto toggle + Luna / Terra / Sol |
 | Generator + critic | Intelligence | Bounded draft → one critique → one rewrite |
@@ -158,10 +159,10 @@ Generated drafts never become authentic examples automatically.
 
 | Blueprint object | Durable form |
 |---|---|
-| Session | Timestamped session `.md` (brief, notes, destination, routing) |
+| Session | Timestamped session `.md` (brief, notes, writing mode, routing) |
 | Draft | Versioned draft `.md` (initial, critic_revision, user_revision) |
-| Destination | Parameter on the session + mechanics profile (pacing, sentence length, pauses) |
-| Push | Accepted `.md` + relationships + learning delta |
+| Writing mode | Parameter on the session + mechanics profile (what the draft is allowed to be) |
+| Push destination | Later: where accepted copy ships. Not the genre picker. |
 
 ## Context assembly and memory
 

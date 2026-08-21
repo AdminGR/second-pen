@@ -11,7 +11,7 @@ Prove the persistent-author loop on one surface: a person can seed quietly, run 
 - One user.
 - Quiet authentic seed (paste or upload), not a library.
 - Typed and dictated brief.
-- Destination as a parameter (at least two of: Reel, web copy, manual, script) that changes mechanics, not only tone.
+- Writing mode as a parameter (genre pills) that changes what the draft is allowed to be, not only tone.
 - Draft as a document identity (pinned, editable, versioned).
 - Listen (TTS) and read/edit as equals.
 - Push as commit: keep generated, edited, and accepted versions even if outbound delivery is a stub.

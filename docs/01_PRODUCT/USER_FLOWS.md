@@ -7,8 +7,8 @@ Source: [Blueprint](../BRAINSTORMING/Second-Pen-BLUEPRINT.md).
 Every session is the same shape.
 
 1. **Start.** The person opens the tool. What to do is obvious: speak or type.
-2. **Brief.** They dictate or type what they need. They may add notes. They may name a destination (Reel, web copy, manual, script). Destination can also be chosen from the working surface.
-3. **Generate.** The system produces a draft in their voice, shaped for that destination's mechanics.
+2. **Brief.** They dictate or type what they need. They may add notes. They choose a **writing mode** (genre) and a **voice lane** (author / brand / system). Both are session clicks, not an onboarding tour.
+3. **Generate.** The system produces a draft shaped for what that mode is allowed to be, in the selected lane (their work, a client brand, or an institutional register).
 4. **Review.** They read the draft, listen to it, or both. They edit if needed. The draft stays pinned; it does not scroll away in the input stream.
 5. **Push.** They push the accepted draft forward, out of the tool. Session ends. The generated version, the edited version, and the accepted version are kept so the voice can improve.
 
@@ -16,7 +16,7 @@ This is the only flow the first surface has to make obvious.
 
 ## Secondary Flows
 
-- **Change destination mid-session.** Re-shape the same brief for different mechanics without starting a new product mode.
+- **Change writing mode mid-session.** Re-shape the same brief for a different craft without starting a new product.
 - **Listen then edit, or edit then listen.** Either order. Both are first-class.
 - **Quiet seed (rare).** Paste or upload authentic writing so the voice exists before the first generating session. Not part of the daily loop. Default path: seed once, then learn from Pushes.
 - **Return to a recent draft.** Secondary. Must not become a library.

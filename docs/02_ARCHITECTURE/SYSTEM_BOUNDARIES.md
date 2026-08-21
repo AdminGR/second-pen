@@ -6,6 +6,8 @@
 
 Same product as mobile, larger reading surface. Hosts the hybrid working surface (input stream + pinned draft). May later host Galaxy as a quiet visualization. Does not own a separate data plane. Does not lead the information architecture.
 
+**Mac shell:** native OS menu bar (File, Open, Close, Folder, Projects). Not in-window web chrome. Folder/Projects are disk operations on Markdown, not an in-app library. The `web/` stub on Vercel is not this shell. See [DESKTOP_APP.md](../01_PRODUCT/DESKTOP_APP.md).
+
 ## Mobile
 
 Governing usage: dictation → destination → listen → push, one-handed. Same Session / Draft / Push identities. Must not require a desktop icon rail or a Galaxy home. Routing picker and Auto toggle need a mobile-native, compact form.

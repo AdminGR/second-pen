@@ -10,7 +10,7 @@ Do not clone a project-page UI. OAuth, sync, webhooks, and workers exist so week
 
 ### Day one (not SoR)
 
-- LLM providers behind Luna / Terra / Sol / Auto
+- LLM providers behind Luna / Terra / Sol / Auto — OpenAI-compatible HTTP; catalog is env (`MODEL_LUNA` / `MODEL_TERRA` / `MODEL_SOL`). Optional later: OpenRouter or Vercel AI Gateway as the endpoint, not as the policy.
 - STT (dictation)
 - TTS (Listen)
 - Canonical Markdown storage

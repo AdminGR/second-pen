@@ -29,7 +29,7 @@ The path is layered: Blueprint governs the first surface. Kickoff is mined for e
 
 **When.** Every session. This is the daily loop. It is also the first thing to prove.
 
-**Where.** The **primary surface is the phone.** One-handed dictation should start and finish the job (brief → destination → listen → push). Mobile layout is not designed yet; that does not make desktop the lead. Desktop mockups exist (`docs/UI:UX/OptionC@2x.png`) as the same product on a larger screen, not as a separate or more complete app.
+**Where.** The **primary surface is the phone.** One-handed dictation should start and finish the job (brief → destination → listen → push). Mobile layout is not designed yet; that does not make desktop the lead. A holding hero lives at `docs/UI:UX/holding-hero-reference.png` (reference only, not approved). Mac desktop, when it exists, uses native OS menus (File, Open, Close, Folder, Projects), not in-page chrome.
 
 **How.** Few durable UI states. Hybrid input stream plus pinned draft. Monochrome, matte, no glass. Type and dictate as equals. Listen and read as equals. Latency is a product requirement. History, library, and settings only as quiet corners.
 
@@ -37,14 +37,14 @@ The path is layered: Blueprint governs the first surface. Kickoff is mined for e
 
 **What.** Four identities the surface needs even before architecture is filled in:
 
-- **Session** — the brief, notes, destination, and conversation that produced this draft.
+- **Session** — the brief, notes, writing mode, and conversation that produced this draft.
 - **Draft** — a document with identity, edits, and versions. Not a chat turn.
-- **Destination** — Reel, web copy, manual, script. Changes pacing, sentence length, pause placement, not only tone.
+- **Writing mode** — genre of this draft (editorial, script, corporate, …). Changes what the prose is allowed to be, not only tone.
 - **Push** — the session-ending commit. The copy leaves. This is also the learning event.
 
 **When.** Modeled now. Implemented when the first vertical slice is built. Not postponed until integrations exist: Push can write to a stub destination and still count as a commit.
 
-**Where.** Desktop: destination tabs, draft panel, Listen, Edit, Push to draft. Mobile: one-handed equivalent, not a shrunk icon rail.
+**Where.** Desktop: writing-mode CTA, draft panel, Listen, Edit, Push to draft. Mobile: one-handed equivalent, not a shrunk icon rail.
 
 **How.** Draft has save / edit / version history. Session notes drive generation; they do not own the draft. Push stores generated version, edited version, and accepted version even if the outbound integration is later.
 
@@ -70,7 +70,7 @@ These survive as rules, even though the person never sees a “memory” screen.
 6. **Draft provenance.** A generated draft should be able to explain voice version, destination, retrieved authentic example IDs, influence (if any), guardrails, model, and which user edits became learning signals. Inspectability can be a quiet affordance, not a dashboard.
 7. **Source class on every passage.** owned / authorized / influence / reference / generated. Generated drafts do not become authentic examples automatically.
 8. **Provider wrapper.** Generation, embeddings, and TTS/STT sit behind adapters. Do not bind the product to Oracle, one embedding dimension, or one model.
-9. **Destination as mechanics.** Extend kickoff “format” (email, social, article) with Blueprint destinations (Reel, web copy, manual, script) and spoken-pacing rules. A Reel script and a manual step are not paced the same way in the same voice.
+9. **Destination as mechanics.** Writing mode (genre pills) sets allowed moves. Push destination (CMS, social, file) is later and separate.
 10. **STT in, TTS out.** Missing from the kickoff. Required by the Blueprint. They are part of the loop, not accessories.
 
 ## Hide until later (engine, not v1 chrome)

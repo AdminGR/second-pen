@@ -7,7 +7,8 @@ Source: [Blueprint](../BRAINSTORMING/Second-Pen-BLUEPRINT.md) and [Path forward]
 These are the product. They belong on the main surface.
 
 - Typed brief and dictated brief as equal ways to start a session.
-- Destination selector: Reel, web copy, manual, script (and later peers). Destination changes structural mechanics (pacing, sentence length, pause placement), not only tone.
+- Writing mode: a call-to-action pill that opens genres (Editorial with long form / short form, script, corporate, technical, journalism, research, speech, thought leadership, creative/literary, conversational, brand & product). Mode sets what the draft is allowed to be — mechanics, not a top tab bar and not a site nav.
+- Voice lane, each session (not onboarding): **Author-dependent** (sound like their journalism / YouTube / writing), **Brand-dependent** (client brand voice, not theirs), **System-dependent** (technical, legal, academic, corporate reporting). These select which corpus or register assembly uses. Named brands/corpora attach after seed — not a library. Push destination (where it ships) is later.
 - Generation through this person's voice model, not a generic "write like me" instruction.
 - Pinned draft: a stable, editable document with identity and versions — not a chat message.
 - Read path: edit the draft in place.
@@ -23,7 +24,8 @@ Quiet, secondary, and only after the core loop is real.
 
 - Recent-session history (not a content CMS).
 - Inspectable provenance for a draft (which voice version, destination, examples) as a corner affordance.
-- Desktop layout choice among the three explored directions, once one is locked.
+- Desktop layout choice among the three explored directions, once one is locked. Holding hero at `docs/UI:UX/holding-hero-reference.png` is reference only.
+- Mac native menu bar (File, Open, Close, Folder, Projects) when the desktop shell exists — not in the Vercel stub.
 
 ## Later
 

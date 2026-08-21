@@ -17,8 +17,9 @@ Entities are people and containers. They are not screens.
 | Workspace | Personal boundary. Later: team. |
 | Day | Calendar membership. Chronology. |
 | Project | A body of work a .md can belong to. |
-| Craft | Kind of writing work (e.g. founder comms, product, support). Optional. |
-| Destination mechanics | Reel, web copy, manual, script — pacing and structure rules, not a folder of templates. |
+| Writing mode | Genre of this draft (editorial long/short, script, corporate, technical, journalism, research, speech, thought leadership, creative, conversational, brand & product). Mechanics, not templates. |
+| Craft | Broader membership a .md can belong to over time. Optional. Distinct from this session’s writing mode. |
+| Push destination | Where accepted copy ships later. Not the genre pills. |
 
 A resource may belong to a day, a project, a craft, and a person at once.
 
@@ -71,10 +72,11 @@ These are different axes. Both are set at write time in frontmatter. A `.md` is 
 
 | Value | Rule |
 |---|---|
-| owned | The person authored it, or accepted it on Push |
+| owned | The person authored it, or accepted it on Push. Retrieved for **author-dependent** sessions. |
 | authorized | Collaborator writing the person is allowed to treat as close to owned (v1: unused) |
+| brand | Client / website brand corpus. Retrieved for **brand-dependent** sessions. Never mixed into authentic. |
 | influence | Someone else’s writing, for technique only |
-| reference | Pointer / optional ingest; not voice |
+| reference | Pointer / optional ingest; not voice. Style manuals may feed **system-dependent** register. |
 | generated | Model output not yet accepted |
 
 Generated never becomes authentic because of indexing. Only Push flips a draft to `owned`.

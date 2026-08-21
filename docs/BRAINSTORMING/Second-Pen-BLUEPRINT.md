@@ -39,8 +39,11 @@ Three desktop layout directions were mocked up to react to, all sharing the hybr
 
 Reference mockups in this repo:
 
-- `docs/UI:UX/OptionC@2x.png` — manuscript / notes direction (destination tabs, Listen, Push to draft)
+- `docs/UI:UX/holding-hero-reference.png` — **holding hero only**, not approved; will grow. Notes column, destination tabs, serif draft, Listen, Push. Does **not** show the Mac menu bar.
+- `docs/UI:UX/OptionC@2x.png` — same manuscript / notes family
 - `docs/UI:UX/Screenshot 2026-08-20 at 1.42.56 PM.png` — rejected frosted-glass reference, not a candidate
+
+Mac desktop is a document app: real OS menus at top-left (File, Open, Close, Folder, Projects). That is not optional chrome and is not painted inside the page. See [DESKTOP_APP.md](../01_PRODUCT/DESKTOP_APP.md).
 
 ## Open questions and what's next
 

@@ -4,8 +4,8 @@ Literal checks. Prototyping speed is when these get skipped. If a PR or a local 
 
 Copy also lives in `AGENTS.md` so Cursor cannot “forget” it.
 
-- [ ] **No new nav item, tab, or browsable list** without an explicit call-out in the change (why it is not a writing OS). Day / project / craft on a `.md` is storage metadata, not a browser.
-- [ ] **Audience and guardrails stay in [context assembly](../02_ARCHITECTURE/CONTEXT_ASSEMBLY.md) steps 3 and 7.** If either appears as a home-screen setting, that is a flag, not a feature.
+- [ ] **No new nav item, tab, or browsable list** without an explicit call-out in the change (why it is not a writing OS). Day / project / craft on a `.md` is storage metadata, not a browser. **Call-out:** Mac File / Open / Close / Folder / Projects are native OS menu items over files on disk, not an in-app library or Projects rail. Do not invent that rail in `web/`. **Call-out:** writing-mode pills and author/brand/system voice-lane pills are session parameters on every write, not onboarding and not a corpus/brand library.
+- [ ] **Audience stays in [context assembly](../02_ARCHITECTURE/CONTEXT_ASSEMBLY.md) step 3** (inferred, not a home-screen setting). **Voice lane (author / brand / system) is a session control** — it chooses which assembly lane runs; it is not a settings wall of guardrail rules. Step 7 still loads register/guardrail *lists* from the store, not a CMS.
 - [ ] **Galaxy is visualization-only** until a written decision reopens it. No Galaxy home, rail, or onboarding.
 - [ ] **Draft is a document**, not a chat turn. Do not put the current draft only in a message log.
 - [ ] **Push writes generated + edited + accepted.** A stub destination is fine. Export-only Push is not.

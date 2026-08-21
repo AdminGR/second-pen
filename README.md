@@ -2,7 +2,7 @@
 
 Second Pen is a persistent author: dictate or type a brief, get a draft in your voice shaped for where it is going (Reel, web copy, manual, script), review by reading or listening, push it out. Not a template picker. Not a writing OS.
 
-**Primary surface:** the phone. Desktop is the same product on a larger screen.
+**Primary surface:** the phone. Desktop is the same product on a larger screen; the Mac app will use native File / Open / Close / Folder / Projects menus. In-window layout is still undecided — [holding hero](docs/UI:UX/holding-hero-reference.png) is reference only.
 
 ## Current state
 
@@ -20,7 +20,7 @@ npm run dev
 
 Open http://localhost:3000 — type or speak a brief, pick a destination, generate, listen, push (downloads `accepted.md`).
 
-If `web/.env.local` contains `OPENAI_API_KEY`, generate uses `gpt-4o-mini`. If not, generate returns a deterministic stub so the loop still closes.
+If `web/.env.local` has `LLM_API_KEY` or `OPENAI_API_KEY`, generate routes Luna/Terra/Sol then calls that model. If not, it returns a deterministic stub. Copy `web/.env.example`.
 
 ## Core loop
 
@@ -36,7 +36,7 @@ Quiet seed (not in this stub) → brief → destination-aware draft → listen/e
 
 ## Stack
 
-Cursor builds. Vercel hosts. Markdown is the writing. Neon indexes later. This stub: browser STT/TTS, HTTP LLM or local stub, `.md` download on Push.
+Cursor builds. Vercel hosts. Markdown is the writing. Neon indexes later. Generation: our policy router + OpenAI-compatible HTTP ([ADR-005](docs/03_DECISIONS/ADR/ADR-005-generation-adapter.md)). Browser STT/TTS. `.md` download on Push.
 
 ## Principle
 

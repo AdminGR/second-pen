@@ -1,18 +1,24 @@
 import { NextResponse } from "next/server";
+import { completeChat, llmCredentials } from "@/lib/complete";
+import { modelFor, routeJob } from "@/lib/route-job";
+import {
+  DEFAULT_VOICE,
+  isVoiceHarness,
+  voiceMechanics,
+  type VoiceHarness,
+} from "@/lib/voice-lane";
+import {
+  DEFAULT_WRITING,
+  isWritingKind,
+  writingMechanics,
+  type WritingKind,
+} from "@/lib/writing-mode";
 
-type Destination = "reel" | "web_copy" | "manual" | "script";
-
-const MECHANICS: Record<Destination, string> = {
-  reel: "short spoken lines, pauses, no long paragraphs",
-  web_copy: "scannable web paragraph, one idea per sentence",
-  manual: "numbered or stepped instructional prose, concrete verbs",
-  script: "spoken script with brief beats, hearable rhythm",
-};
-
-function stubProse(brief: string, destination: Destination): string {
+function stubProse(brief: string, writing: WritingKind, voice: VoiceHarness): string {
   return [
-    `[stub · ${destination}]`,
-    `Shaped for ${MECHANICS[destination]}.`,
+    `[stub · ${writing} · ${voice}]`,
+    `Shaped for ${writingMechanics(writing)}.`,
+    voiceMechanics(voice),
     brief.trim(),
   ].join("\n\n");
 }
@@ -20,57 +26,61 @@ function stubProse(brief: string, destination: Destination): string {
 export async function POST(request: Request) {
   const body = (await request.json()) as {
     brief?: string;
-    destination?: Destination;
+    writing?: string;
+    voice?: string;
   };
   const brief = body.brief?.trim() ?? "";
-  const destination = body.destination ?? "web_copy";
+  const writing: WritingKind = isWritingKind(body.writing) ? body.writing : DEFAULT_WRITING;
+  const voice: VoiceHarness = isVoiceHarness(body.voice) ? body.voice : DEFAULT_VOICE;
   if (!brief) {
     return NextResponse.json({ error: "brief required" }, { status: 400 });
   }
 
-  const key = process.env.OPENAI_API_KEY;
-  if (!key) {
+  const routed = routeJob({ job: "draft", writing, voice, brief });
+  const model = modelFor(routed.tier);
+  const mechanics = writingMechanics(writing);
+  const lane = voiceMechanics(voice);
+
+  if (!llmCredentials()) {
     return NextResponse.json({
-      prose: stubProse(brief, destination),
+      prose: stubProse(brief, writing, voice),
       stub: true,
+      tier: routed.tier,
+      model,
+      reason: routed.reason,
+      writing,
+      voice,
     });
   }
 
-  // TEMPORARY STUB — not CONTEXT_ASSEMBLY.md. One call, no critic, no retrieval.
-  const res = await fetch("https://api.openai.com/v1/chat/completions", {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${key}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      model: "gpt-4o-mini",
-      temperature: 0.4,
-      messages: [
-        {
-          role: "system",
-          content: `Write clearly and consistently, shaped for ${destination} (${MECHANICS[destination]}). Do not claim a personal voice. Return only the draft.`,
-        },
-        { role: "user", content: brief },
-      ],
-    }),
+  // TEMPORARY — not CONTEXT_ASSEMBLY.md. One call, no critic, no retrieval yet.
+  const result = await completeChat({
+    model,
+    system: `Write clearly and consistently. Mode: ${writing} (${mechanics}). Voice lane: ${voice} (${lane}). Stay inside both constraints. Return only the draft.`,
+    user: brief,
   });
 
-  if (!res.ok) {
-    const err = await res.text();
+  if (!result.ok) {
     return NextResponse.json(
-      { error: "openai failed", detail: err.slice(0, 300) },
+      {
+        error: "llm failed",
+        detail: result.error,
+        tier: routed.tier,
+        model,
+        writing,
+        voice,
+      },
       { status: 502 },
     );
   }
 
-  const data = (await res.json()) as {
-    choices?: Array<{ message?: { content?: string } }>;
-  };
-  const prose = data.choices?.[0]?.message?.content?.trim();
-  if (!prose) {
-    return NextResponse.json({ error: "empty model response" }, { status: 502 });
-  }
-
-  return NextResponse.json({ prose, stub: false });
+  return NextResponse.json({
+    prose: result.prose,
+    stub: false,
+    tier: routed.tier,
+    model,
+    reason: routed.reason,
+    writing,
+    voice,
+  });
 }

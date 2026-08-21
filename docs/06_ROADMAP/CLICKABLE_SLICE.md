@@ -14,10 +14,11 @@ This is a stub loop. Not eight-step assembly. ADR-001 is already accepted; that 
 | Stack | Next.js App Router, TypeScript, npm, React client page for mic/TTS |
 | Layout | Two panels only: brief left, pinned draft right. **No icon rail, no Galaxy, no extra routes** |
 | Visual | Black / white / gray, no glass, no polish |
-| Destinations | `reel` \| `web_copy` \| `manual` \| `script` |
+| Writing mode | CTA pill → genre pills |
+| Voice lane | CTA under writing mode: author / brand / system (+ harness pills). Session parameter, not a library. |
 | STT | `webkitSpeechRecognition` / `SpeechRecognition`; if missing, typing still works |
 | TTS | `window.speechSynthesis` |
-| LLM | `POST /api/draft`. If `OPENAI_API_KEY` is set, call `gpt-4o-mini`. If not, return a deterministic destination-shaped stub. Never hang waiting for a key |
+| LLM | Policy router then OpenAI-compatible HTTP ([ADR-005](../03_DECISIONS/ADR/ADR-005-generation-adapter.md)). Stub if no key. | Not a forked router. Not CLI spawn on Vercel |
 | Prompt | Temporary: write clearly and consistently, shaped for the destination. Comment `TEMPORARY STUB — not CONTEXT_ASSEMBLY.md` |
 | Push | Client download of `accepted.md` with frontmatter; JSON in the page for generated / edited / accepted. No `fs.writeFile` on the server |
 | Auth | None |

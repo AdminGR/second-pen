@@ -1,3 +1,5 @@
+export const metadata = { title: "Second Pen" };
+
 export default function RootLayout({
   children,
 }: Readonly<{
