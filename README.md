@@ -1,40 +1,43 @@
 # second-pen
 
-## Current State
+Second Pen is a persistent author: dictate or type a brief, get a draft in your voice shaped for where it is going (Reel, web copy, manual, script), review by reading or listening, push it out. Not a template picker. Not a writing OS.
 
-Discovery / Architecture
+**Primary surface:** the phone. Desktop is the same product on a larger screen.
 
-## Product
+## Current state
 
-- docs/00_VISION/
-- docs/01_PRODUCT/
+Clickable stub in `web/`. Architecture is written. Eight-step assembly is **not** wired yet (intentional stub).
 
-## Architecture
+Canonical surface contract: [Blueprint](docs/BRAINSTORMING/Second-Pen-BLUEPRINT.md).
 
-- docs/02_ARCHITECTURE/
+## Run locally
 
-## Decisions
+```bash
+cd web
+npm install
+npm run dev
+```
 
-- docs/03_DECISIONS/ADR/
+Open http://localhost:3000 — type or speak a brief, pick a destination, generate, listen, push (downloads `accepted.md`).
 
-## Risks
+If `web/.env.local` contains `OPENAI_API_KEY`, generate uses `gpt-4o-mini`. If not, generate returns a deterministic stub so the loop still closes.
 
-- docs/04_RISK_SECURITY/
+## Core loop
 
-## Research
+Quiet seed (not in this stub) → brief → destination-aware draft → listen/edit → push.
 
-- docs/05_RESEARCH/
+## Docs
 
-## Roadmap
+**Product:** [Vision](docs/00_VISION/PRODUCT_VISION.md) · [Problem](docs/00_VISION/PROBLEM_STATEMENT.md) · [Jobs](docs/00_VISION/USER_JOBS.md) · [Features](docs/01_PRODUCT/FEATURES.md) · [Flows](docs/01_PRODUCT/USER_FLOWS.md) · [Desktop](docs/01_PRODUCT/DESKTOP_APP.md) · [Mobile](docs/01_PRODUCT/MOBILE_COMPANION.md) · [MVP](docs/06_ROADMAP/MVP.md)
 
-- docs/06_ROADMAP/
+**This slice:** [CLICKABLE_SLICE.md](docs/06_ROADMAP/CLICKABLE_SLICE.md)
 
-## Current Build Target
+**Engineering:** [Architecture](docs/02_ARCHITECTURE/ARCHITECTURE.md) · [Context assembly](docs/02_ARCHITECTURE/CONTEXT_ASSEMBLY.md) · [Data model](docs/02_ARCHITECTURE/DATA_MODEL.md) · [ADR log](docs/03_DECISIONS/ADR/README.md) · [Stack](docs/03_DECISIONS/STACK_DECISIONS.md) · [Guardrails](docs/03_DECISIONS/PROTOTYPE_GUARDRAILS.md)
 
-MVP definition in progress.
+## Stack
+
+Cursor builds. Vercel hosts. Markdown is the writing. Neon indexes later. This stub: browser STT/TTS, HTTP LLM or local stub, `.md` download on Push.
 
 ## Principle
 
-During brainstorming, organize knowledge.
-
-During development, organize code.
+During brainstorming, organize knowledge. During development, organize code.
