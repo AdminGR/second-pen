@@ -9,19 +9,17 @@
 - Browser STT / TTS; typing works if mic is missing.
 - Writing-mode pills and author/brand/system voice-lane pills as session parameters.
 - `POST /api/draft` — policy router (`lib/route-job.ts`) then OpenAI-compatible HTTP (`lib/complete.ts`); deterministic stub if no key.
-- Push downloads `accepted.md` with frontmatter + **Generated / Edited / Accepted** sections (`lib/push-md.ts`). Client-only Blob download; no `fs.writeFile` on the server. `npm run build` green after this change.
+- Push downloads `accepted.md` with frontmatter + **Generated / Edited / Accepted** sections (`lib/push-md.ts`). Client-only Blob download; no `fs.writeFile` on the server.
+- Verification scripts in `web/`: `lint` = `tsc --noEmit`; `test` = `tsx --test lib/smoke.test.ts` (smoke of `buildPushMarkdown`, `routeJob`, writing-mode helpers). `npm run build` / `lint` / `test` all green.
 
 ## Now (pick ONE per iteration)
 
-1. **Verification scripts in `web/`.** There is no `lint` or `test` script. Add the smallest gate the loop can run (`tsc --noEmit` as `lint` or `typecheck`; optional smoke of `buildPushMarkdown` / `route-job` / writing-mode helpers). Do not add a test framework tour.
-2. **Confirm `cd web && npm run build` is green** after any change. Fix what you broke.
-3. **If 1–2 are done:** mark this slice complete below. Do **not** start seed, Neon, Galaxy, critic, Option A rail, extra pages, or context assembly.
+1. **No product work.** Slice is complete — do not add seed, Neon, Galaxy, critic, Option A rail, extra pages, or context assembly.
+2. **Only if red:** fix a failing `cd web && npm run build` (and `lint` / `test` if present). Otherwise no-op and leave this file alone aside from refreshing Last iteration.
 
 ## Slice complete?
 
-No. Product loop (speak/type → draft → listen → edit → push with provenance) is in place; verification scripts (Now #1) still open before declaring the slice complete.
-
-When yes, replace this section with “Yes — clickable slice stopped.” and make no product-surface edits. Further iterations should no-op (or only fix a red build).
+Yes — clickable slice stopped.
 
 ## Needs a human decision (do not guess)
 
@@ -34,8 +32,8 @@ When yes, replace this section with “Yes — clickable slice stopped.” and m
 
 ## Last iteration
 
-- Implemented Push provenance: `web/lib/push-md.ts` builds the download; `web/app/page.tsx` Push uses it. File includes frontmatter (`versions: generated, edited, accepted`) and three H2 sections. Verified with `cd web && npm run build` (pass). No `lint` / `test` scripts yet.
+- Added `web/` verification gate: `npm run lint` (`tsc --noEmit`), `npm run test` (node:test via `tsx`, `lib/smoke.test.ts` covering push markdown provenance, route-job tiers, writing-mode helpers). Added `tsx` as a devDependency only. Verified: lint pass, test 6/6, build pass. Marked clickable slice complete — no further product features.
 
 ## Sensible next task
 
-Verification scripts in `web/` (Now #1) — smallest `lint`/`typecheck` (and optional smoke of `buildPushMarkdown`).
+No-op unless `cd web && npm run build` (or lint/test) is red. Do not expand the product surface.
