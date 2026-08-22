@@ -18,6 +18,7 @@ import {
   type WritingCategoryId,
   type WritingKind,
 } from "@/lib/writing-mode";
+import { buildPushMarkdown } from "@/lib/push-md";
 
 type SpeechRec = {
   lang: string;
@@ -190,16 +191,14 @@ export default function Page() {
   function pushToDraft() {
     if (!draft.trim()) return;
     const accepted = draft;
-    const md = `---
-source_class: owned
-memory_kind: episodic
-writing: ${writing}
-voice: ${voice}
-stub: true
----
-
-${accepted}
-`;
+    const edited = draft;
+    const md = buildPushMarkdown({
+      generated: generated || draft,
+      edited,
+      accepted,
+      writing,
+      voice,
+    });
     const blob = new Blob([md], { type: "text/markdown;charset=utf-8" });
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
@@ -207,8 +206,7 @@ ${accepted}
     a.download = "accepted.md";
     a.click();
     URL.revokeObjectURL(url);
-    console.info("push", { generated, edited: draft, accepted, writing, voice });
-    setStatus("Pushed — accepted.md downloaded.");
+    setStatus("Pushed — accepted.md (generated + edited + accepted).");
   }
 
   return (
