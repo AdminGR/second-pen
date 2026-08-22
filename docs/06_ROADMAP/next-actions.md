@@ -32,7 +32,7 @@ Yes — clickable slice stopped.
 
 ## Last iteration
 
-- Verification no-op: `cd web && npm run build`, `lint`, and `test` all green (build ok, tsc clean, smoke 6/6). No code or product changes. Slice remains complete.
+- Verification no-op (2026-08-21): `cd web && npm run build`, `lint`, and `test` all green (Next.js build ok, `tsc --noEmit` clean, smoke 6/6). No code or product changes. Slice remains complete.
 
 ## Sensible next task
 
