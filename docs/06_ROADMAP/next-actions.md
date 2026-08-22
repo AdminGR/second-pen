@@ -32,7 +32,7 @@ Yes — clickable slice stopped.
 
 ## Last iteration
 
-- Added `web/` verification gate: `npm run lint` (`tsc --noEmit`), `npm run test` (node:test via `tsx`, `lib/smoke.test.ts` covering push markdown provenance, route-job tiers, writing-mode helpers). Added `tsx` as a devDependency only. Verified: lint pass, test 6/6, build pass. Marked clickable slice complete — no further product features.
+- Verification no-op: `cd web && npm run build`, `lint`, and `test` all green (build ok, tsc clean, smoke 6/6). No code or product changes. Slice remains complete.
 
 ## Sensible next task
 
