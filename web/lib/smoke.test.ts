@@ -3,6 +3,7 @@
  */
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
+import { buildDraftManifest, buildDraftRequest } from "./draft-contract";
 import { buildPushMarkdown } from "./push-md";
 import { HEAVY_BRIEF_CHARS, routeJob } from "./route-job";
 import {
@@ -62,5 +63,74 @@ describe("writing-mode helpers", () => {
     assert.equal(isStructuralWriting("editorial_long"), true);
     assert.equal(isStructuralWriting("editorial_short"), false);
     assert.equal(writingLabel("editorial_short").cta, "Editorial · Short form");
+  });
+});
+
+describe("draft contract", () => {
+  it("maps brief_text to a brief body and rejects extras", () => {
+    const body = buildDraftRequest({
+      brief_text: "  Say the launch in one breath.  ",
+      writing: "script",
+      voice: "author_writing",
+    });
+    assert.deepEqual(body, {
+      brief: "Say the launch in one breath.",
+      writing: "script",
+      voice: "author_writing",
+    });
+    assert.deepEqual(Object.keys(body).sort(), ["brief", "voice", "writing"]);
+  });
+
+  it("rejects an empty brief, an unknown kind, and an unknown voice", () => {
+    assert.throws(
+      () => buildDraftRequest({ brief_text: "  ", writing: "script", voice: "author_writing" }),
+      /brief_text required/,
+    );
+    assert.throws(
+      () => buildDraftRequest({ brief_text: "Hello", writing: "linkedin_post", voice: "author_writing" }),
+      /unknown writing/,
+    );
+    assert.throws(
+      () => buildDraftRequest({ brief_text: "Hello", writing: "script", voice: "notes/voice.md" }),
+      /unknown voice/,
+    );
+  });
+
+  it("builds a generated episodic manifest from the engine response", () => {
+    const manifest = buildDraftManifest({
+      prose: "Open on the bench.",
+      stub: true,
+      tier: "terra",
+      model: "gpt-4o-mini",
+      reason: "default draft",
+      writing: "script",
+      voice: "author_writing",
+    });
+    assert.deepEqual(manifest, {
+      writing: "script",
+      voice: "author_writing",
+      tier: "terra",
+      model: "gpt-4o-mini",
+      reason: "default draft",
+      stub: true,
+      source_class: "generated",
+      memory_kind: "episodic",
+    });
+  });
+
+  it("rejects an empty prose payload", () => {
+    assert.throws(
+      () =>
+        buildDraftManifest({
+          prose: "  ",
+          stub: true,
+          tier: "terra",
+          model: "gpt-4o-mini",
+          reason: "default draft",
+          writing: "script",
+          voice: "author_writing",
+        }),
+      /prose required/,
+    );
   });
 });
