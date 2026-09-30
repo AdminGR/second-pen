@@ -50,6 +50,9 @@ export function buildDraftRequest(input: DraftContractInput): DraftRequestBody {
 }
 
 export function buildDraftManifest(response: DraftEngineResponse): DraftManifest {
+  if (typeof response.prose !== "string") {
+    throw new Error("prose required");
+  }
   const prose = response.prose.trim();
   if (!prose) {
     throw new Error("prose required");

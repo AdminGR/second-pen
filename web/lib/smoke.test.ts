@@ -133,4 +133,19 @@ describe("draft contract", () => {
       /prose required/,
     );
   });
+
+  it("rejects a response with no prose field", () => {
+    assert.throws(
+      () =>
+        buildDraftManifest({
+          stub: true,
+          tier: "terra",
+          model: "gpt-4o-mini",
+          reason: "default draft",
+          writing: "script",
+          voice: "author_writing",
+        } as Parameters<typeof buildDraftManifest>[0]),
+      /prose required/,
+    );
+  });
 });
