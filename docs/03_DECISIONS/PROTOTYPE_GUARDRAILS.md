@@ -14,3 +14,4 @@ Copy also lives in `AGENTS.md` so Cursor cannot “forget” it.
 - [ ] **Bounded critic:** one pass, one rewrite max. Auto is not an unbounded loop.
 - [ ] **Human `.md` bodies are not overwritten** by regeneration unless the user overrode that in settings.
 - [ ] **Canonical store is Markdown.** Indexes are disposable. Do not make Postgres the only copy of the writing.
+- [ ] **Content calendars, slates, posting cadence, and scheduled runs** belong to a client of the engine ([ADR-006](ADR/ADR-006-content-driver-boundary.md)). The client contract is `brief_text` + `writing` + `voice` → `prose` + manifest. `routing_tier` stays engine policy.

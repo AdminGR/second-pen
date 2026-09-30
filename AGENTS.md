@@ -20,3 +20,4 @@ The clickable slice **is allowed**. Do not add `dashboard/`, libraries, Galaxy, 
 - [ ] Bounded critic: not in this slice (zero critic calls).
 - [ ] Human `.md` bodies are not overwritten by regeneration.
 - [ ] Canonical store is Markdown; do not `fs.writeFile` on Vercel as the only copy.
+- [ ] Content calendars, slates, posting cadence, and scheduled runs belong to a client of the engine ([ADR-006](docs/03_DECISIONS/ADR/ADR-006-content-driver-boundary.md)). The client contract is `brief_text` + `writing` + `voice` → `prose` + manifest. `routing_tier` stays engine policy.

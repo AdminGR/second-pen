@@ -41,4 +41,4 @@ Oracle's agent-memory demo is a research reference, not a runtime dependency.
 
 ## What stays outside
 
-Galaxy-as-home, project-page clones, OAuth on first login, webhook workers, and a library browser. Those belong to later layers (5–6 and quiet experience corners), not the first slice.
+Galaxy-as-home, project-page clones, OAuth on first login, webhook workers, and a library browser. Those belong to later layers (5–6 and quiet experience corners), not the first slice. Content calendars, slates, posting cadence, and scheduled content runs belong to clients of the engine, not the engine ([ADR-006](../03_DECISIONS/ADR/ADR-006-content-driver-boundary.md)).
